@@ -1,0 +1,526 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/c9/architect#readme">architect (v0.1.11)</a>
+</h1>
+<h4>A Simple yet powerful plugin system for node applications</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.architect">module architect</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.architect.Architect">
+            function <span class="apidocSignatureSpan">architect.</span>Architect
+            <span class="apidocSignatureSpan">(config)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.architect.createApp">
+            function <span class="apidocSignatureSpan">architect.</span>createApp
+            <span class="apidocSignatureSpan">(config, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.architect.loadConfig">
+            function <span class="apidocSignatureSpan">architect.</span>loadConfig
+            <span class="apidocSignatureSpan">(configPath, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.architect.resolveConfig">
+            function <span class="apidocSignatureSpan">architect.</span>resolveConfig
+            <span class="apidocSignatureSpan">(config, base, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">architect.</span>Architect.prototype</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.architect.Architect">module architect.Architect</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.architect.Architect.Architect">
+            function <span class="apidocSignatureSpan">architect.</span>Architect
+            <span class="apidocSignatureSpan">(config)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.architect.Architect.prototype">module architect.Architect.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.architect.Architect.prototype.destroy">
+            function <span class="apidocSignatureSpan">architect.Architect.prototype.</span>destroy
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.architect.Architect.prototype.getService">
+            function <span class="apidocSignatureSpan">architect.Architect.prototype.</span>getService
+            <span class="apidocSignatureSpan">(name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.architect.Architect.prototype.loadPlugins">
+            function <span class="apidocSignatureSpan">architect.Architect.prototype.</span>loadPlugins
+            <span class="apidocSignatureSpan">(config, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.architect.Architect.prototype.registerPlugin">
+            function <span class="apidocSignatureSpan">architect.Architect.prototype.</span>registerPlugin
+            <span class="apidocSignatureSpan">(plugin, next)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.architect" id="apidoc.module.architect">module architect</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.architect.Architect" id="apidoc.element.architect.Architect">
+        function <span class="apidocSignatureSpan">architect.</span>Architect
+        <span class="apidocSignatureSpan">(config)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Architect(config) {
+    var app = this;
+    app.config = [];
+    app.destructors = [];
+    app.services = {
+        hub: {
+            on: function (name, callback) {
+                app.on(name, callback);
+            }
+        }
+    };
+
+    // Give createApp some time to subscribe to our "ready" event
+    (typeof process === "object" ? process.nextTick : setTimeout)(function() {
+        app.loadPlugins(config, function(err) {
+            if (err) {
+                throw err;
+            }
+            app.emit("ready", app);
+        });
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.architect.createApp" id="apidoc.element.architect.createApp">
+        function <span class="apidocSignatureSpan">architect.</span>createApp
+        <span class="apidocSignatureSpan">(config, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function createApp(config, callback) {
+    var app;
+    try {
+        app = new Architect(config);
+    } catch(err) {
+        if (!callback) throw err;
+        return callback(err, app);
+    }
+    if (callback) {
+        app.on("error", done);
+        app.on("ready", onReady);
+    }
+    return app;
+
+    function onReady(app) {
+        done();
+    }
+
+    function done(err) {
+        if (err) {
+            app.destroy();
+        }
+        app.removeListener("error", done);
+        app.removeListener("ready", onReady);
+        callback(err, app);
+    }
+
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.architect.loadConfig" id="apidoc.element.architect.loadConfig">
+        function <span class="apidocSignatureSpan">architect.</span>loadConfig
+        <span class="apidocSignatureSpan">(configPath, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function loadConfig(configPath, callback) {
+  var config = require(configPath);
+  var base = dirname(configPath);
+
+  return resolveConfig(config, base, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.architect.resolveConfig" id="apidoc.element.architect.resolveConfig">
+        function <span class="apidocSignatureSpan">architect.</span>resolveConfig
+        <span class="apidocSignatureSpan">(config, base, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function resolveConfig(config, base, callback) {
+    if (!callback)
+        return resolveConfigSync(config, base);
+    else
+        resolveConfigAsync(config, base, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.architect.Architect" id="apidoc.module.architect.Architect">module architect.Architect</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.architect.Architect.Architect" id="apidoc.element.architect.Architect.Architect">
+        function <span class="apidocSignatureSpan">architect.</span>Architect
+        <span class="apidocSignatureSpan">(config)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Architect(config) {
+    var app = this;
+    app.config = [];
+    app.destructors = [];
+    app.services = {
+        hub: {
+            on: function (name, callback) {
+                app.on(name, callback);
+            }
+        }
+    };
+
+    // Give createApp some time to subscribe to our "ready" event
+    (typeof process === "object" ? process.nextTick : setTimeout)(function() {
+        app.loadPlugins(config, function(err) {
+            if (err) {
+                throw err;
+            }
+            app.emit("ready", app);
+        });
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.architect.Architect.prototype" id="apidoc.module.architect.Architect.prototype">module architect.Architect.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.architect.Architect.prototype.destroy" id="apidoc.element.architect.Architect.prototype.destroy">
+        function <span class="apidocSignatureSpan">architect.Architect.prototype.</span>destroy
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">destroy = function () {
+    var app = this;
+
+    app.destructors.forEach(function(destroy) {
+        destroy();
+    });
+
+    app.destructors = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+    function onReady(app) {
+        done();
+    }
+
+    function done(err) {
+        if (err) {
+            app.<span class="apidocCodeKeywordSpan">destroy</span>();
+        }
+        app.removeListener("error", done);
+        app.removeListener("ready", onReady);
+        callback(err, app);
+    }
+
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.architect.Architect.prototype.getService" id="apidoc.element.architect.Architect.prototype.getService">
+        function <span class="apidocSignatureSpan">architect.Architect.prototype.</span>getService
+        <span class="apidocSignatureSpan">(name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getService = function (name) {
+    if (!this.services[name]) {
+        throw new Error("Service '" + name + "' not found in architect app!");
+    }
+    return this.services[name];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.architect.Architect.prototype.loadPlugins" id="apidoc.element.architect.Architect.prototype.loadPlugins">
+        function <span class="apidocSignatureSpan">architect.Architect.prototype.</span>loadPlugins
+        <span class="apidocSignatureSpan">(config, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">loadPlugins = function (config, callback) {
+    var app = this;
+
+    var sortedConfig;
+    try {
+        sortedConfig = checkConfig(config.concat(app.config));
+    }
+    catch(ex) {
+        return callback(ex);
+    }
+
+    // prevent double loading of plugins
+    sortedConfig = sortedConfig.filter(function(c) {
+        return config.indexOf(c) &gt; -1;
+    });
+
+    var p;
+    function next(err) {
+        if (err) {
+            return callback(err);
+        }
+        if (p &amp;&amp; app.config.indexOf(p) === -1) {
+            app.config.push(p);
+        }
+
+        p = sortedConfig.shift();
+        if (!p) {
+            return callback();
+        }
+        app.registerPlugin(p, next);
+    }
+    next();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+                app.on(name, callback);
+            }
+        }
+    };
+
+    // Give createApp some time to subscribe to our "ready" event
+    (typeof process === "object" ? process.nextTick : setTimeout)(function() {
+        app.<span class="apidocCodeKeywordSpan">loadPlugins</span>(config, function(err) {
+            if (err) {
+                throw err;
+            }
+            app.emit("ready", app);
+        });
+    });
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.architect.Architect.prototype.registerPlugin" id="apidoc.element.architect.Architect.prototype.registerPlugin">
+        function <span class="apidocSignatureSpan">architect.Architect.prototype.</span>registerPlugin
+        <span class="apidocSignatureSpan">(plugin, next)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">registerPlugin = function (plugin, next) {
+    var app = this;
+    var services = app.services;
+
+    var imports = {};
+    if (plugin.consumes) {
+        plugin.consumes.forEach(function (name) {
+            imports[name] = services[name];
+        });
+    }
+
+    try {
+        plugin.setup(plugin, imports, register);
+    } catch(e) {
+        return app.emit("error", e);
+    }
+
+    function register(err, provided) {
+        if (err) {
+            return app.emit("error", err);
+        }
+
+        plugin.provides.forEach(function (name) {
+            if (!provided.hasOwnProperty(name)) {
+                var err = new Error("Plugin failed to provide " + name + " service. " + JSON.stringify(plugin));
+                return app.emit("error", err);
+            }
+            services[name] = provided[name];
+
+            if (typeof provided[name] != "function")
+                provided[name].name = name;
+
+            app.emit("service", name, services[name]);
+        });
+        if (provided &amp;&amp; provided.hasOwnProperty("onDestroy")) {
+            app.destructors.push(provided.onDestroy);
+        }
+
+        plugin.destroy = function() {
+            if (plugin.provides.length) {
+                // @todo, make it possible if all consuming plugins are also dead
+                var err = new Error("Plugins that provide services cannot be destroyed. " + JSON.stringify(plugin));
+                return app.emit("error", err);
+            }
+
+            if (provided &amp;&amp; provided.hasOwnProperty("onDestroy")) {
+                app.destructors.splice(app.destructors.indexOf(provided.onDestroy), 1);
+                provided.onDestroy();
+            }
+
+            // delete from config
+            app.config.splice(app.config.indexOf(plugin), 1);
+            app.emit("destroyed", plugin);
+        };
+
+        app.emit("plugin", plugin);
+        next();
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+           app.config.push(p);
+       }
+
+       p = sortedConfig.shift();
+       if (!p) {
+           return callback();
+       }
+       app.<span class="apidocCodeKeywordSpan">registerPlugin</span>(p, next);
+   }
+   next();
+};
+
+/**
+* Register a plugin in the service
+*/
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
