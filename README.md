@@ -1,6 +1,6 @@
 # npmdoc-architect
 
-#### api documentation for  [architect (v0.1.11)](https://github.com/c9/architect#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-architect.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-architect) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-architect.svg)](https://travis-ci.org/npmdoc/node-npmdoc-architect)
+#### api documentation for  [architect (v0.1.13)](https://github.com/c9/architect#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-architect.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-architect) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-architect.svg)](https://travis-ci.org/npmdoc/node-npmdoc-architect)
 
 #### A Simple yet powerful plugin system for node applications
 
@@ -43,9 +43,10 @@
     "devDependencies": {},
     "directories": {},
     "dist": {
-        "shasum": "591352ad7dfb2ead05965db3b37d3c490c21d7a2",
-        "tarball": "https://registry.npmjs.org/architect/-/architect-0.1.11.tgz"
+        "shasum": "efa78783fd818b64e4c47b0e75eea193520390ba",
+        "tarball": "https://registry.npmjs.org/architect/-/architect-0.1.13.tgz"
     },
+    "gitHead": "e01ab96740583b91ce32da26233167cc79b7b621",
     "homepage": "https://github.com/c9/architect#readme",
     "licenses": [
         {
@@ -74,7 +75,8 @@
         "type": "git",
         "url": "git+ssh://git@github.com/c9/architect.git"
     },
-    "version": "0.1.11"
+    "scripts": {},
+    "version": "0.1.13"
 }
 ```
 
